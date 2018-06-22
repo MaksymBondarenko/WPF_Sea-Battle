@@ -54,6 +54,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Startpage.xaml.cs">
+      <DependentUpon>Startpage.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -66,6 +69,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Startpage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -95,6 +102,13 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\SeaBattle.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Палуба1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Выстрел.png" />
+    <Resource Include="Images\Ранение.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

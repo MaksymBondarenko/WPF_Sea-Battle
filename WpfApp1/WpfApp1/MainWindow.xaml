@@ -12,16 +12,28 @@
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
             <Setter Property="FontSize" Value="12"/>
         </Style>
+
         <Style TargetType="Button" x:Key="ButtonStyle">
+            <Setter Property="BorderBrush" Value="AliceBlue"/>
             
+                <Setter Property="ContextMenu">
+                <Setter.Value>
+                    <ContextMenu>
+                        <TextBlock Text="Стрельба"/>
+                        <TextBlock Text="Стрельба"/>
+                        <TextBlock Text="Стрельба"/>
+                    </ContextMenu>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Window.Resources>
-    
-            <Window.Background>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="#FF0D8CF5" Offset="0"/>
-            <GradientStop Color="#FFEDF0F3" Offset="1"/>
-        </LinearGradientBrush>
+
+    <Window.Background>
+        <RadialGradientBrush>
+            <GradientStop Color="#FFC2D1F1" Offset="0.525"/>
+            <GradientStop Color="#FFB2BFDA"/>
+            <GradientStop Color="#FFE3E7F1" Offset="1"/>
+        </RadialGradientBrush>
     </Window.Background>
     <TabControl>
         <TabItem Header="Поле игрока">
@@ -43,7 +55,7 @@
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Row="0" >
-                    <Grid >
+                    <Grid Name="playerShips">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"></RowDefinition>
                             <RowDefinition Height="1*"></RowDefinition>
@@ -140,8 +152,38 @@
                             <Label Content="К"  Style="{DynamicResource labelStyle}"/>
                         </Grid>
 
-                        <Grid Grid.Row="2" Grid.Column="1">
-                            <Button Style="{DynamicResource ButtonStyle}"/>
+                        <Grid  Grid.Row="2" Grid.Column="1">
+                            <Button>
+                               
+                                <Image>
+                                    <Image.Triggers>
+                                        <EventTrigger RoutedEvent="Loaded">
+                                            <BeginStoryboard>
+                                                <Storyboard RepeatBehavior="Forever">
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Source"
+                                                   Duration="0:0:3">
+                                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                            <DiscreteObjectKeyFrame.Value>
+                                                                <BitmapImage UriSource="Images/Ранение.png"/>
+                                                            </DiscreteObjectKeyFrame.Value>
+                                                        </DiscreteObjectKeyFrame>
+                                                        <DiscreteObjectKeyFrame KeyTime="0:0:1">
+                                                            <DiscreteObjectKeyFrame.Value>
+                                                                <BitmapImage UriSource="Images/Палуба1.png"/>
+                                                            </DiscreteObjectKeyFrame.Value>
+                                                        </DiscreteObjectKeyFrame>
+                                                        <DiscreteObjectKeyFrame KeyTime="0:0:2">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <BitmapImage UriSource="Images/Выстрел.png"/>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                        </DiscreteObjectKeyFrame>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Image.Triggers>
+                                </Image>
+                            </Button>
                         </Grid>
                         <Grid Grid.Row="2" Grid.Column="2">
                             <Button Style="{DynamicResource ButtonStyle}"/>

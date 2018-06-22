@@ -22,7 +22,42 @@ namespace WpfApp1
     {
         public MainWindow()
         {
+           
             InitializeComponent();
+            foreach (var item in playerShips.Children)
+            {
+                
+                if (item is Grid)
+                {
+                    foreach (var child1 in (item as Grid).Children)
+                    {
+                        if (item is Grid)
+                        {
+                            foreach (var child in (item as Grid).Children)
+                            {
+
+                                if (child is Button)
+                                {
+                                    (child as Button).Click += Button_Click;
+                                   
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+           
+            Window1 Startpage = new Window1();
+            //Startpage.Owner = this;
+            Startpage.Show();
+           this.Close();
+        }    
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+          
         }
+
+        
     }
 }
