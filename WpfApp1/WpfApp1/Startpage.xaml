@@ -24,12 +24,86 @@
                         </GradientStopCollection>
                     </LinearGradientBrush>
                 </Border.Background>
-                <ContentPresenter RecognizesAccessKey="True" Margin="{TemplateBinding Padding}"></ContentPresenter>
+                <ContentPresenter RecognizesAccessKey="True" ></ContentPresenter>
             </Border>
         </ControlTemplate>
+
+        <ControlTemplate x:Key="ButtonShip" TargetType="Button" >
+            <Border BorderBrush="#FFDBF3F9" BorderThickness="2" CornerRadius="8" Name="border" TextBlock.TextAlignment="Center">
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStopCollection>
+                            <GradientStop Offset="0" Color="#FF92B9E8"></GradientStop>
+                            <GradientStop Offset="1" Color="#FFDBF3F9"></GradientStop>
+                        </GradientStopCollection>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Button BorderBrush="#FFDBF3F9" BorderThickness="2">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <Image Source="Images/Палуба1.png"/>
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                    <ContentPresenter RecognizesAccessKey="True"></ContentPresenter>
+                </Button>
+            </Border>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="ButtonShot" TargetType="Button" >
+            <Border BorderBrush="#FFDBF3F9" BorderThickness="2" CornerRadius="8" Name="border" TextBlock.TextAlignment="Center">
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStopCollection>
+                            <GradientStop Offset="0" Color="#FF92B9E8"></GradientStop>
+                            <GradientStop Offset="1" Color="#FFDBF3F9"></GradientStop>
+                        </GradientStopCollection>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Button BorderBrush="#FFDBF3F9" BorderThickness="2">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <Image Source="Images/Выстрел.png"/>
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                    <ContentPresenter RecognizesAccessKey="True" ></ContentPresenter>
+                </Button>
+            </Border>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="ButtonWound" TargetType="Button" >
+            <Border BorderBrush="#FFDBF3F9" BorderThickness="2" CornerRadius="8" Name="border">
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStopCollection>
+                            <GradientStop Offset="0" Color="#FF92B9E8"></GradientStop>
+                            <GradientStop Offset="1" Color="#FFDBF3F9"></GradientStop>
+                        </GradientStopCollection>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Button BorderBrush="#FFDBF3F9" BorderThickness="2">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Image Source="Images/Ранение.png" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                    <ContentPresenter RecognizesAccessKey="True" ></ContentPresenter>
+                </Button>
+            </Border>
+        </ControlTemplate>
+        <!--<ControlTemplate x:Key="ButtonShip" TargetType="Button" >
+            <Button Template="{DynamicResource ButtonShip}">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <Image Source="Images/Палуба1.png"/>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+        </ControlTemplate>-->
     </Window.Resources>
 
-    <Grid>
+    <Grid Name="grid">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
@@ -63,7 +137,7 @@
             <TextBlock Text="SeaBattle starts..." FontFamily="Kristen ITC" FontSize="24" HorizontalAlignment="Center" Foreground="#660696"/>
         </Grid>
         <Grid Grid.Row="0" Grid.Column="12" Grid.RowSpan="12">
-            <Button Height="180" VerticalAlignment="Center" Margin="2" Template="{DynamicResource ButtonTemplate}">
+            <Button Name="btnStart" Height="180" VerticalAlignment="Center" Margin="2" Template="{DynamicResource ButtonTemplate}" Tag="0" Click="btnStart_Click">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"></RowDefinition>
@@ -76,25 +150,26 @@
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Row="0" Grid.Column="0">
-                        <TextBlock Text="S" FontFamily="Kristen ITC" FontSize="30" Foreground="#660696" HorizontalAlignment="Center" >
-                            <TextBlock.RenderTransform>
-                                <RotateTransform x:Name="rotate" CenterX="10" CenterY="20"/>
-                            </TextBlock.RenderTransform>
-                            <TextBlock.Triggers>
-                                <EventTrigger RoutedEvent="Loaded">
-                                    <BeginStoryboard>
-                                        <Storyboard RepeatBehavior="Forever">
-                                            <DoubleAnimation Storyboard.TargetName="rotate"  
+                        <TextBlock Text="S" FontFamily="Kristen ITC" FontSize="30" Foreground="#660696" HorizontalAlignment="Center">
+                        <TextBlock.RenderTransform>
+                            <RotateTransform x:Name="rotate" CenterX="10" CenterY="20"/>
+                        </TextBlock.RenderTransform>
+                        <TextBlock.Triggers>
+                            <EventTrigger RoutedEvent="Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard RepeatBehavior="Forever">
+                                        <DoubleAnimation Storyboard.TargetName="rotate"  
                                                              Storyboard.TargetProperty="Angle"   
                                                              By="360" Duration="0:0:10"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </TextBlock.Triggers>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </TextBlock.Triggers>
                         </TextBlock>
                     </Grid>
                     <Grid Grid.Row="1" Grid.Column="0" >
                         <TextBlock Text="T" FontFamily="Kristen ITC" FontSize="30" Foreground="#660696" HorizontalAlignment="Center"/>
+
                     </Grid>
                     <Grid Grid.Row="2" Grid.Column="0">
                         <TextBlock Text="A" FontFamily="Kristen ITC" FontSize="30" Foreground="#660696" HorizontalAlignment="Center"/>
@@ -103,7 +178,22 @@
                         <TextBlock Text="R" FontFamily="Kristen ITC" FontSize="30" Foreground="#660696" HorizontalAlignment="Center"/>
                     </Grid>
                     <Grid Grid.Row="4" Grid.Column="0">
-                        <TextBlock Text="T" FontFamily="Kristen ITC" FontSize="30" Foreground="#660696" HorizontalAlignment="Center"/>
+                        <TextBlock Text="T" FontFamily="Kristen ITC" FontSize="30" Foreground="#660696" HorizontalAlignment="Center">
+                            <TextBlock.RenderTransform>
+                                <RotateTransform x:Name="rotate1" CenterX="10" CenterY="20"/>
+                            </TextBlock.RenderTransform>
+                            <TextBlock.Triggers>
+                                <EventTrigger RoutedEvent="Loaded">
+                                    <BeginStoryboard>
+                                        <Storyboard RepeatBehavior="Forever">
+                                            <DoubleAnimation Storyboard.TargetName="rotate1"  
+                                                             Storyboard.TargetProperty="Angle"   
+                                                             By="-360" Duration="0:0:10"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </TextBlock.Triggers>
+                        </TextBlock>
                     </Grid>
                 </Grid>
             </Button>
@@ -173,308 +263,308 @@
         </Grid>
 
         <Grid Grid.Row="2" Grid.Column="1">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="2" Grid.Column="2">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="2" Grid.Column="3">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="2" Grid.Column="4">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="2" Grid.Column="5">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="2" Grid.Column="6">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="2" Grid.Column="7">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="2" Grid.Column="8">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="2" Grid.Column="9">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="2" Grid.Column="10">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
 
         <Grid Grid.Row="3" Grid.Column="1">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="3" Grid.Column="2">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonShip}" Tag="false"/>
         </Grid>
         <Grid Grid.Row="3" Grid.Column="3">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="3" Grid.Column="4">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="3" Grid.Column="5">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonShip}" Tag="false"/>
         </Grid>
         <Grid Grid.Row="3" Grid.Column="6">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="3" Grid.Column="7">
-            <Button Template="{DynamicResource ButtonTemplate}" />
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true" />
         </Grid>
         <Grid Grid.Row="3" Grid.Column="8">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonShip}" Tag="false"/>
         </Grid>
         <Grid Grid.Row="3" Grid.Column="9">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonShip}" Tag="false"/>
         </Grid>
         <Grid Grid.Row="3" Grid.Column="10">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
 
         <Grid Grid.Row="4" Grid.Column="1">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="4" Grid.Column="2">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonShip}" Tag="false"/>
         </Grid>
         <Grid Grid.Row="4" Grid.Column="3">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="4" Grid.Column="4">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="4" Grid.Column="5">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="4" Grid.Column="6">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="4" Grid.Column="7">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="4" Grid.Column="8">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="4" Grid.Column="9">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="4" Grid.Column="10">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
 
         <Grid Grid.Row="5" Grid.Column="1">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="5" Grid.Column="2">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonShip}" Tag="false"/>
         </Grid>
         <Grid Grid.Row="5" Grid.Column="3">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="5" Grid.Column="4">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="5" Grid.Column="5">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="5" Grid.Column="6">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="5" Grid.Column="7">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="5" Grid.Column="8">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="5" Grid.Column="9">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="5" Grid.Column="10">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="6" Grid.Column="1">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="6" Grid.Column="2">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="6" Grid.Column="3">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="6" Grid.Column="4">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonShip}" Tag="false"/>
         </Grid>
         <Grid Grid.Row="6" Grid.Column="5">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonShip}" Tag="false"/>
         </Grid>
         <Grid Grid.Row="6" Grid.Column="6">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonShip}" Tag="false"/>
         </Grid>
         <Grid Grid.Row="6" Grid.Column="7">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonShip}" Tag="false"/>
         </Grid>
         <Grid Grid.Row="6" Grid.Column="8">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="6" Grid.Column="9">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonShip}" Tag="false"/>
         </Grid>
         <Grid Grid.Row="6" Grid.Column="10">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
 
         <Grid Grid.Row="7" Grid.Column="1">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="7" Grid.Column="2">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="7" Grid.Column="3">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="7" Grid.Column="4">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="7" Grid.Column="5">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="7" Grid.Column="6">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="7" Grid.Column="7">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="7" Grid.Column="8">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="7" Grid.Column="9">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonShip}" Tag="false"/>
         </Grid>
         <Grid Grid.Row="7" Grid.Column="10">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="8" Grid.Column="1">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="8" Grid.Column="2">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonShip}" Tag="false"/>
         </Grid>
         <Grid Grid.Row="8" Grid.Column="3">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="8" Grid.Column="4">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonShip}" Tag="false"/>
         </Grid>
         <Grid Grid.Row="8" Grid.Column="5">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="8" Grid.Column="6">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="8" Grid.Column="7">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="8" Grid.Column="8">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="8" Grid.Column="9">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="8" Grid.Column="10">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="9" Grid.Column="1">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="9" Grid.Column="2">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonShip}" Tag="false"/>
         </Grid>
         <Grid Grid.Row="9" Grid.Column="3">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="9" Grid.Column="4">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="9" Grid.Column="5">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="9" Grid.Column="6">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="9" Grid.Column="7">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonShip}" Tag="false"/>
         </Grid>
         <Grid Grid.Row="9" Grid.Column="8">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="9" Grid.Column="9">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="9" Grid.Column="10">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="10" Grid.Column="1">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="10" Grid.Column="2">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="10" Grid.Column="3">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="10" Grid.Column="4">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="10" Grid.Column="5">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="10" Grid.Column="6">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="10" Grid.Column="7">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonShip}" Tag="false"/>
         </Grid>
         <Grid Grid.Row="10" Grid.Column="8">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="10" Grid.Column="9">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonShip}" Tag="false"/>
         </Grid>
         <Grid Grid.Row="10" Grid.Column="10">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="11" Grid.Column="1">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="11" Grid.Column="2">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonShip}" Tag="false"/>
         </Grid>
         <Grid Grid.Row="11" Grid.Column="3">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="11" Grid.Column="4">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="11" Grid.Column="5">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="11" Grid.Column="6">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="11" Grid.Column="7">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonShip}" Tag="false"/>
         </Grid>
         <Grid Grid.Row="11" Grid.Column="8">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="11" Grid.Column="9">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
         <Grid Grid.Row="11" Grid.Column="10">
-            <Button Template="{DynamicResource ButtonTemplate}"/>
+            <Button Template="{DynamicResource ButtonTemplate}" Tag="true"/>
         </Grid>
     </Grid>
 </Window>
