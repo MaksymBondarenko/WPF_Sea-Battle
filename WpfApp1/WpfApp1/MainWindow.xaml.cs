@@ -49,7 +49,7 @@ namespace WpfApp1
            
             Window1 Startpage = new Window1();
             //Startpage.Owner = this;
-            Startpage.Show();
+            Startpage.ShowDialog();
            this.Close();
         }    
 

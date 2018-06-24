@@ -22,10 +22,10 @@ namespace WpfApp1
         int Kol_One=4, Kol_Two=3, Kol_Three=2, Kol_Four=1, n=0;
         Random RND = new Random();
         List<Button> Buttons;
+
         public Window1()
         {
             InitializeComponent();
-            Loaded += MainWindow_Loadded;
             Buttons = new List<Button>();
             foreach (var item in grid.Children)
             {
@@ -51,23 +51,26 @@ namespace WpfApp1
                     }
                 }
             }
+            DDD();
         }
 
-        private void MainWindow_Loadded(object sender, RoutedEventArgs e)
+        public void DDD()
         {
-            int i=0;
-            while (i!=10)
+            int i = 10;
+            while (i!=0)
             {
+
+           
                 int Shot = RND.Next(0, 100);
                 if (Buttons[Shot].Tag.ToString() == "false")
                 {
+
                     Buttons[Shot].Template = Resources["ButtonWound"] as ControlTemplate;
                 }
                 else { Buttons[Shot].Template = Resources["ButtonShot"] as ControlTemplate; }
-                i++;
+                System.Threading.Thread.Sleep(1000);
+                i--;
             }
-
-
         }
 
         private void btnStart_Click(object sender, RoutedEventArgs e)

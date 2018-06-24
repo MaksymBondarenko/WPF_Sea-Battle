@@ -82,12 +82,17 @@
                 </Border.Background>
                 <Button BorderBrush="#FFDBF3F9" BorderThickness="2">
                     <Button.ContentTemplate>
+                        
                         <DataTemplate>
+                            
                             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
                                 <Image Source="Images/Ранение.png" />
                             </StackPanel>
+                            
                         </DataTemplate>
+                        
                     </Button.ContentTemplate>
+                    
                     <ContentPresenter RecognizesAccessKey="True" ></ContentPresenter>
                 </Button>
             </Border>
