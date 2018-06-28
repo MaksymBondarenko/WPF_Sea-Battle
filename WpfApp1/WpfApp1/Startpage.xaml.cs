@@ -14,19 +14,17 @@ using System.Windows.Shapes;
 
 namespace WpfApp1
 {
-    /// <summary>
-    /// Логика взаимодействия для Window1.xaml
-    /// </summary>
+  
     public partial class Window1 : Window
     {
-        int Kol_One=4, Kol_Two=3, Kol_Three=2, Kol_Four=1, n=0;
         Random RND = new Random();
         List<Button> Buttons;
-
+        DialogWindow dialog = new DialogWindow();
         public Window1()
         {
             InitializeComponent();
             Buttons = new List<Button>();
+
             foreach (var item in grid.Children)
             {
 
@@ -56,7 +54,7 @@ namespace WpfApp1
 
         public void DDD()
         {
-            int i = 10;
+            int i = 20;
             while (i!=0)
             {
 
@@ -68,22 +66,22 @@ namespace WpfApp1
                     Buttons[Shot].Template = Resources["ButtonWound"] as ControlTemplate;
                 }
                 else { Buttons[Shot].Template = Resources["ButtonShot"] as ControlTemplate; }
-                System.Threading.Thread.Sleep(1000);
+                
                 i--;
             }
         }
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
-           
-            ////if (dialog.ShowDialog() == true)
-            ////{
-            ////    // Пользователь разрешил действие. Продолжить1
-            ////}
-            ////else
-            ////{
-            ////    // Пользователь отменил действие.
-            ////}
+
+            if (dialog.ShowDialog() == true)
+            {
+                // Пользователь разрешил действие. Продолжить1
+            }
+            else
+            {
+                // Пользователь отменил действие.
+            }
             this.Close();
             
         }
