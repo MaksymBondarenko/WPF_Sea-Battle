@@ -15,9 +15,7 @@ using System.Windows.Shapes;
 
 namespace WpfApp1
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
+   
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -47,17 +45,22 @@ namespace WpfApp1
                 }
             }
            
-            Window1 Startpage = new Window1();
-            //Startpage.Owner = this;
+            Window1 Startpage = new Window1(SeaBattle);
             Startpage.ShowDialog();
            this.Close();
         }    
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
+            //Image img = new Image();
+            //BitmapImage btimg = new BitmapImage();
+            //Uri u = new Uri("Images/Палуба1.png");
+            //btimg.BeginInit();
+            //btimg.UriSource = u;
+            //btimg.EndInit();
+            //img.Source = btimg;
+            //(sender as Button).Style =new Style(Button,"{ButtonStyleStart}");
         }
-
         
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="SeaBattle" Height="400" Width="700" FontStretch="Medium" Icon="Images\SeaBattle.jpg" FontWeight="Bold">
+       Name="SeaBattle" Title="SeaBattle" Height="400" Width="700" FontStretch="Medium" Icon="Images\SeaBattle.jpg" FontWeight="Bold">
     
     <Window.Resources>
         <Style TargetType="Label" x:Key="labelStyle">
@@ -14,15 +14,26 @@
         </Style>
 
         <Style TargetType="Button" x:Key="ButtonStyle">
-            <Setter Property="BorderBrush" Value="AliceBlue"/>
-            
-                <Setter Property="ContextMenu">
+            <Setter Property="BorderBrush" Value="AliceBlue"></Setter>
+            <!--<Setter Property="ContextMenu">
                 <Setter.Value>
                     <ContextMenu>
                         <TextBlock Text="Стрельба"/>
                         <TextBlock Text="Стрельба"/>
-                        <TextBlock Text="Стрельба"/>
+                        <TextBlock Text="Стрельба"/>Imag
                     </ContextMenu>
+                </Setter.Value>-->
+        </Style>
+
+        <Style TargetType="Button" x:Key="ButtonStyleStart">
+            <Setter Property="BorderBrush" Value="AliceBlue"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border>
+                            <Image  Source="Images/Палуба1.png"/>
+                        </Border>
+                    </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
@@ -153,8 +164,7 @@
                         </Grid>
 
                         <Grid  Grid.Row="2" Grid.Column="1">
-                            <Button>
-                               
+                            <!--<Button>
                                 <Image>
                                     <Image.Triggers>
                                         <EventTrigger RoutedEvent="Loaded">
@@ -183,7 +193,7 @@
                                         </EventTrigger>
                                     </Image.Triggers>
                                 </Image>
-                            </Button>
+                            </Button>-->
                         </Grid>
                         <Grid Grid.Row="2" Grid.Column="2">
                             <Button Style="{DynamicResource ButtonStyle}"/>

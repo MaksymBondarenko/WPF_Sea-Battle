@@ -17,14 +17,15 @@ namespace WpfApp1
   
     public partial class Window1 : Window
     {
+        Window SeaBattle = null;
         Random RND = new Random();
         List<Button> Buttons;
-        DialogWindow dialog = new DialogWindow();
-        public Window1()
+        public Window1(Window SeaBattle)
         {
+            
             InitializeComponent();
             Buttons = new List<Button>();
-
+            this.SeaBattle = SeaBattle;
             foreach (var item in grid.Children)
             {
 
@@ -74,16 +75,8 @@ namespace WpfApp1
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
 
-            if (dialog.ShowDialog() == true)
-            {
-                // Пользователь разрешил действие. Продолжить1
-            }
-            else
-            {
-                // Пользователь отменил действие.
-            }
             this.Close();
-            
+            SeaBattle.ShowDialog();
         }
     }
 }
